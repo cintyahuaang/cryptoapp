@@ -55,4 +55,3 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui
   .span-2{grid-column:span 1}
   .tvwrap{height:320px}
 }
-
