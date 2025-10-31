@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CryptoApp — Analyze • Predict • Profit</title>
+  <meta name="description" content="CryptoApp: Dashboard kripto real-time dengan harga, berita, chart, dan converter. Analyze • Predict • Profit." />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="preconnect" href="https://api.coingecko.com" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="dark">
+  <header class="container header">
+    <div class="brand">
+      <img src="assets/logo.png" alt="CryptoApp Logo" />
+      <div class="tagline">Analyze • Predict • Profit</div>
+    </div>
+    <div class="actions">
+      <button id="refreshBtn" class="btn">Refresh</button>
+      <label class="theme-toggle">
+        <input type="checkbox" id="themeSwitch" />
+        <span>Dark</span>
+      </label>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <section class="card span-2">
+      <h2>Top 20 Coins</h2>
+      <div id="tableLoader" class="loader">Memuat data…</div>
+      <table id="coinsTable" class="table hidden">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>24h%</th>
+            <th>Market Cap</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Chart BTC/USDT</h2>
+      <div class="tvwrap">
+        <!-- TradingView Widget -->
+        <div class="tradingview-widget-container">
+          <div id="tvchart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card span-2">
+      <h2>Berita Kripto</h2>
+      <div id="newsList" class="news-list">
+        <div class="loader">Memuat berita…</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Converter</h2>
+      <div class="converter">
+        <input id="amount" type="number" min="0" placeholder="Jumlah…" />
+        <select id="coinSelect"></select>
+        <div class="result" id="convResult">Pilih koin & masukkan jumlah</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span>© 2025 CryptoApp — Built with public APIs.</span>
+    <a href="#" id="termsLink">Terms</a>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/converter.js"></script>
+  <script type="text/javascript">
+    // TradingView embed (lightweight, no key)
+    (function() {
+      const s = document.createElement("script");
+      s.src = "https://s3.tradingview.com/tv.js";
+      s.onload = () => {
+        new TradingView.widget({
+          autosize: true,
+          symbol: "BINANCE:BTCUSDT",
+          interval: "30",
+          timezone: "Etc/UTC",
+          theme: document.body.classList.contains("dark") ? "dark" : "light",
+          style: "1",
+          locale: "en",
+          toolbar_bg: "#0f1115",
+          container_id: "tvchart"
+        });
+      };
+      document.body.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
